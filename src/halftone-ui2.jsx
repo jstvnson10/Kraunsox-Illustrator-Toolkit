@@ -124,9 +124,11 @@ function main() {
     // --------------------------------------------------
 
     var outputLayer = doc.layers.add();
-
-    outputLayer.name =
-        "KRAUNSOX HALFTONE v1.3 - " +
+outputLayer.name =
+    "KRAUNSOX HALFTONE v1.4 - " +
+    settings.preset +
+    " - " +
+    settings.shape;1.3 - " +
         settings.shape;
 
 
@@ -651,6 +653,8 @@ resetButton.onClick = function() {
 
 
         dialog.settings = {
+            preset:
+        presetDropdown.selection.text,
 
             spacing:
                 spacing,
