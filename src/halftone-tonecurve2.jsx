@@ -26,7 +26,7 @@ if (app.documents.length === 0) {
     var maxDotSize = 16;
 
     // TONE CONTROL
-    var gamma = 1.0;
+    var gamma = 2.0;
 
     // --------------------------------------
     // COLOR
