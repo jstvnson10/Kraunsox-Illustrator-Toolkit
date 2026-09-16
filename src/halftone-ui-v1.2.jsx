@@ -1253,4 +1253,290 @@ function calculateTone(
 
 
 // ======================================================
-//
+// DOT SIZE
+// ======================================================
+
+function calculateDotSize(
+    tone,
+    minSize,
+    maxSize
+) {
+
+    return (
+        minSize +
+        tone *
+        (
+            maxSize -
+            minSize
+        )
+    );
+}
+
+
+// ======================================================
+// CREATE BLACK
+// ======================================================
+
+function createBlack() {
+
+    var black =
+        new RGBColor();
+
+
+    black.red =
+        0;
+
+    black.green =
+        0;
+
+    black.blue =
+        0;
+
+
+    return black;
+}
+
+
+// ======================================================
+// CREATE DOT
+// ======================================================
+
+function createDot(
+    parent,
+    centerX,
+    centerY,
+    size,
+    color
+) {
+
+    if (size <= 0.01) {
+        return;
+    }
+
+
+    var left =
+        centerX -
+        size /
+        2;
+
+    var top =
+        centerY +
+        size /
+        2;
+
+
+    var dot =
+        parent.pathItems.ellipse(
+            top,
+            left,
+            size,
+            size
+        );
+
+
+    dot.filled =
+        true;
+
+    dot.fillColor =
+        color;
+
+    dot.stroked =
+        false;
+}
+
+
+// ======================================================
+// GENERATE SPATIAL HALFTONE
+// ======================================================
+
+function generateSpatialHalftone(
+    dotGroup,
+    bounds,
+    gradient,
+    gridRadius,
+    spacing,
+    minDotSize,
+    maxDotSize,
+    gamma,
+    screenAngle,
+    gradientAngle
+) {
+
+    var black =
+        createBlack();
+
+
+    for (
+        var row = -gridRadius;
+        row <= gridRadius;
+        row++
+    ) {
+
+        for (
+            var column = -gridRadius;
+            column <= gridRadius;
+            column++
+        ) {
+
+            var gridX =
+                column *
+                spacing;
+
+            var gridY =
+                row *
+                spacing;
+
+
+            var rotated =
+                rotatePoint(
+                    gridX,
+                    gridY,
+                    screenAngle
+                );
+
+
+            var centerX =
+                bounds.centerX +
+                rotated.x;
+
+            var centerY =
+                bounds.centerY +
+                rotated.y;
+
+
+            if (
+                centerX >=
+                    bounds.left &&
+
+                centerX <=
+                    bounds.right &&
+
+                centerY <=
+                    bounds.top &&
+
+                centerY >=
+                    bounds.bottom
+            ) {
+
+                var position =
+                    getGradientPosition(
+                        centerX,
+                        centerY,
+                        bounds,
+                        gradientAngle
+                    );
+
+
+                var brightness =
+                    sampleGradient(
+                        gradient,
+                        position
+                    );
+
+
+                var darkness =
+                    1 -
+                    brightness;
+
+
+                var tone =
+                    calculateTone(
+                        darkness,
+                        gamma
+                    );
+
+
+                var dotSize =
+                    calculateDotSize(
+                        tone,
+                        minDotSize,
+                        maxDotSize
+                    );
+
+
+                createDot(
+                    dotGroup,
+                    centerX,
+                    centerY,
+                    dotSize,
+                    black
+                );
+            }
+        }
+    }
+}
+
+
+// ======================================================
+// CLIPPING MASK
+// ======================================================
+
+function createClippingMask(
+    artwork,
+    clippingGroup
+) {
+
+    var mask =
+        artwork.duplicate(
+            clippingGroup,
+            ElementPlacement.PLACEATBEGINNING
+        );
+
+
+    mask.name =
+        "HALFTONE MASK";
+
+
+    mask.clipping =
+        true;
+
+
+    clippingGroup.clipped =
+        true;
+
+
+    return mask;
+}
+
+
+// ======================================================
+// CLAMP
+// ======================================================
+
+function clamp(
+    value,
+    minimum,
+    maximum
+) {
+
+    if (value < minimum) {
+        return minimum;
+    }
+
+
+    if (value > maximum) {
+        return maximum;
+    }
+
+
+    return value;
+}
+
+
+// ======================================================
+// RUN
+// ======================================================
+
+try {
+
+    main();
+
+} catch (error) {
+
+    alert(
+        "KRAUNSOX HALFTONE ERROR\n\n" +
+        error.message +
+        "\n\nLine: " +
+        error.line
+    );
+}
