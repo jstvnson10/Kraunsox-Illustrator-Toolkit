@@ -60,30 +60,66 @@ function main() {
 
 
     // ==================================================
-    // USER SETTINGS
-    // ==================================================
+// USER SETTINGS
+// ==================================================
 
-    var gamma = Number(
-        prompt(
-            "Enter gamma:",
-            CONFIG.gamma
-        )
-    );
+var gammaInput = prompt(
+    "Enter gamma:",
+    "1.0"
+);
 
-    var angle = Number(
-        prompt(
-            "Enter screen angle:",
-            CONFIG.angle
-        )
-    );
+if (gammaInput === null) {
+    return;
+}
 
-    var spacing = Number(
-        prompt(
-            "Enter dot spacing:",
-            CONFIG.spacing
-        )
-    );
+var gamma = parseFloat(gammaInput);
 
+if (isNaN(gamma) || gamma <= 0) {
+    alert("Gamma must be a number greater than 0.");
+    return;
+}
+
+
+// --------------------------------------------------
+// ANGLE
+// --------------------------------------------------
+
+var angleInput = prompt(
+    "Enter screen angle:",
+    "45"
+);
+
+if (angleInput === null) {
+    return;
+}
+
+var angle = parseFloat(angleInput);
+
+if (isNaN(angle)) {
+    alert("Angle must be a number.");
+    return;
+}
+
+
+// --------------------------------------------------
+// SPACING
+// --------------------------------------------------
+
+var spacingInput = prompt(
+    "Enter dot spacing:",
+    "14"
+);
+
+if (spacingInput === null) {
+    return;
+}
+
+var spacing = parseFloat(spacingInput);
+
+if (isNaN(spacing) || spacing <= 0) {
+    alert("Spacing must be a number greater than 0.");
+    return;
+}
 
     // ==================================================
     // READ ACTUAL ARTWORK COLOR
