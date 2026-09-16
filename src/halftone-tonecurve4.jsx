@@ -29,9 +29,13 @@ if (app.documents.length === 0) {
     var gamma = Number(
     prompt(
         "Enter halftone gamma:\n\n" +
-        "0.5 = heavier\n" +
-        "1.0 = normal\n" +
-        "2.0 = lighter",
+        "0.25 = very heeavy\n" +
+        "0.50 = heavy\n" +
+        "0.75 = slightly heavy\n" +
+        "1.00 = linear\n" + 
+        "1.50 = lighter" +
+        "2.00 = light\n" +
+        "3.00 = heavy\n",
         "1.0"
     )
 );
