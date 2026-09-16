@@ -26,7 +26,15 @@ if (app.documents.length === 0) {
     var maxDotSize = 16;
 
     // TONE CONTROL
-    var gamma = 2.0;
+    var gamma = Number(
+    prompt(
+        "Enter halftone gamma:\n\n" +
+        "0.5 = heavier\n" +
+        "1.0 = normal\n" +
+        "2.0 = lighter",
+        "1.0"
+    )
+);
 
     // --------------------------------------
     // COLOR
