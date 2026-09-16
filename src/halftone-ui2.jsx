@@ -516,29 +516,29 @@ presetDropdown.onChange = function() {
     // --------------------------------------------------
     // RESET
     // --------------------------------------------------
+resetButton.onClick = function() {
 
-    resetButton.onClick = function() {
+    presetDropdown.selection = 0;
+    shapeDropdown.selection = 0;
 
-        shapeDropdown.selection = 0;
+    spacingField.text =
+        DEFAULTS.spacing;
 
-        spacingField.text =
-            DEFAULTS.spacing;
+    minDotField.text =
+        DEFAULTS.minDotSize;
 
-        minDotField.text =
-            DEFAULTS.minDotSize;
+    maxDotField.text =
+        DEFAULTS.maxDotSize;
 
-        maxDotField.text =
-            DEFAULTS.maxDotSize;
+    gammaField.text =
+        DEFAULTS.gamma;
 
-        gammaField.text =
-            DEFAULTS.gamma;
+    screenAngleField.text =
+        DEFAULTS.screenAngle;
 
-        screenAngleField.text =
-            DEFAULTS.screenAngle;
-
-        gradientAngleField.text =
-            DEFAULTS.gradientAngle;
-    };
+    gradientAngleField.text =
+        DEFAULTS.gradientAngle;
+};
 
 
     // --------------------------------------------------
