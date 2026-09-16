@@ -17,11 +17,11 @@ if (app.documents.length === 0) {
     // SETTINGS
     // --------------------------------------
 
-    var rows = 15;
-    var columns = 15;
+    var rows = 30;
+    var columns = 30;
 
-    var dotSize = 10;
-    var spacing = 20;
+    var dotSize = 5;
+    var spacing = 10;
 
     // --------------------------------------
     // COLOR
@@ -44,8 +44,8 @@ if (app.documents.length === 0) {
     var top = artboard[1];
 
     // Start 50pt inside the artboard
-    var startX = left + 50;
-    var startY = top - 50;
+    var startX = left + 80;
+    var startY = top - 80;
 
     // --------------------------------------
     // HALFTONE LAYER
